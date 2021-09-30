@@ -18,6 +18,9 @@ appId: "1:270863144955:web:2254775631c6ec3b6d1d5e"
 firebase.initializeApp(firebaseConfig);
 // console.log(firebase);
 
+// console.log(`user: ${sessionStorage.getItem('userid')}`);
+let userid = sessionStorage.getItem('userid');
+// const userid = sesionStorage.getItem('userid');
 const sendBtn = document.querySelector('.send-btn');
 const inputs = document.querySelectorAll('input');
 const form = document.querySelector('.chat-holder');
@@ -29,7 +32,8 @@ form.addEventListener('submit', handleSubmit);
 // get data from firebase when page is loaded
 firebase.database().ref('chat').child('message').on('child_added', function(snapshot){
     // console.log(snapshot.val());
-    let nameVal = snapshot.val().name; // string
+    // let nameVal = snapshot.val().name; // string
+    let nameVal = snapshot.val().name; 
     let msgVal = snapshot.val().msg; // string
     let dateVal = snapshot.val().date;
 
@@ -50,7 +54,7 @@ firebase.database().ref('chat').child('message').on('child_added', function(snap
 
     // console.log(chatBubble);
 
-    if(nameVal !== 'arwin'){
+    if(nameVal !== userid){
         chatBubble.classList.remove('self');
     } 
 
@@ -63,8 +67,11 @@ firebase.database().ref('chat').child('message').on('child_added', function(snap
 function handleSubmit(e){
     e.preventDefault();
 
-    let name = inputs[0].value;
-    let message = inputs[1].value;
+    // let name = inputs[0].value;
+    let name = userid;
+    console.log(`name: ${userid}`);
+    let message = e.target.elements.message.value;
+    // console.log(e.target.elements.message.value);
     let now = new Date();
 
     //get the date, month and year
@@ -72,7 +79,7 @@ function handleSubmit(e){
     let mm = String(now.getMonth() + 1).padStart(2, '0'); //January is 0!
     let yyyy = now.getFullYear();
 
-    let date = mm + '/' + dd + '/' + yyyy;
+    let date = dd + '/' + mm + '/' + yyyy;
 
     console.log(date);
 
@@ -81,16 +88,16 @@ function handleSubmit(e){
     // console.log(now.toISOString().substr(0,10));
 
 
-    //push data and store in database
+    // push data and store in database
     firebase.database().ref('chat').child('message').push({
         name: name,
         msg: message,
         // add date values here
-        date: date,
+        date: date
     });
 
 
-    console.log(`name: ${inputs[0].value}, message: ${inputs[1].value}`);
+    // console.log(`name: ${inputs[0].value}, message: ${inputs[1].value}`);
 
     form.reset();
 }
