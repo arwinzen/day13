@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <link rel="stylesheet" href="chat.css">
+        <title>FireBase</title>
+    </head>
+    <body>
+        <div id="container">
+            <div class="chat-room">
+                <!-- <div class="message-holder">
+                    <h2 class="name">Name</h2>
+                    <p class="message">Message</p>
+                </div> -->
+            </div>
+
+            <form class="chat-holder">
+                <input type="text" placeholder="name" required>
+                <input type="text" placeholder="message" required>
+                <button class="send-btn btn">Send</button>
+            </form>
+        </div>
+    </body>
+    <!--firebase app-->
+    <script src="https://www.gstatic.com/firebasejs/7.15.3/firebase-app.js";
+    "></script>
+    <!--firebase config-->
+    <script src="https://www.gstatic.com/firebasejs/7.15.3/firebase-database.js";
+    "></script>
+    <script src="chat.js"></script>
+</html>
