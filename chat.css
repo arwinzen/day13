@@ -65,6 +65,7 @@ button {
 
 .message-holder {
     width: max-content;
+    height: max-content;
     max-width: 300px;
     margin: 1rem;
     padding: 1rem;
@@ -79,7 +80,7 @@ button {
     margin: 0;
     padding: 0;
     color: ivory;
-    text-shadow: 1px 1px 2px black;
+    /* text-shadow: 1px 1px 2px black; */
     /* opacity: 0.8; */
 }
 

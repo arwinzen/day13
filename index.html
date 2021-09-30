@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Login</title>
+        <link rel="stylesheet" href="styles.css">
+    </head>
+    <body class="login">
+        <div class="credentials">
+            <form class="login-form login">
+                <input id="userid" type="text" placeholder="Username" required autocomplete="off">
+                <input id="password" type="password" placeholder="Password" required>
+                <button class="login-btn" type="submit">Login</button>
+                <p>Don't have an account? <a class="signup-redirect" href="#">Signup</a></p>
+            </form>
+            <!-- <form class="signup-form signup">
+                <input class="userid" type="text" placeholder="Username" required autocomplete="off">
+                <input class="password" type="password" placeholder="Password" required>
+                <button class="signup-btn" type="submit">Sign Up</button>
+                <p>Already have an account? <a class="login-redirect" href="#">Login</a></p>
+            </form> -->
+        </div>
+    </body>
+    <!--firebase app-->
+    <script src="https://www.gstatic.com/firebasejs/7.15.3/firebase-app.js";
+    "></script>
+    <!--firebase config-->
+    <script src="https://www.gstatic.com/firebasejs/7.15.3/firebase-database.js";
+    "></script>
+    <script src="script.js"></script>
+</html>

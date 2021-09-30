@@ -16,7 +16,7 @@ appId: "1:270863144955:web:2254775631c6ec3b6d1d5e"
 
 // Initialize Firebase
 firebase.initializeApp(firebaseConfig);
-console.log(firebase);
+// console.log(firebase);
 
 const sendBtn = document.querySelector('.send-btn');
 const inputs = document.querySelectorAll('input');
@@ -28,35 +28,35 @@ form.addEventListener('submit', handleSubmit);
 
 // get data from firebase when page is loaded
 firebase.database().ref('chat').child('message').on('child_added', function(snapshot){
-    console.log(snapshot.val());
+    // console.log(snapshot.val());
     let nameVal = snapshot.val().name; // string
     let msgVal = snapshot.val().msg; // string
-    let chatBubble;
+    let dateVal = snapshot.val().date;
 
-    // create element from firebase
-    
-    if (nameVal == 'arwin'){
-        chatBubble = 
-        `
-        <div class="message-holder self">
-            <h2 class="name">${nameVal}</h2>
-            <p class="message">${msgVal}</p>
-        </div>
-        `
-    } else {
-        chatBubble =
-        `
-        <div class="message-holder">
-            <h2 class="name">${nameVal}</h2>
-            <p class="message">${msgVal}</p>
-        </div>
-        `
+    // to remove undefined values for test data
+    if (!dateVal){
+        dateVal = "";
     }
-    
-    console.log(chatBubble);
-    chatRoom.innerHTML += chatBubble;
 
-    console.log(chatRoom.scrollHeight);
+    let chatBubble = document.createElement('div');
+    chatBubble.classList.add('message-holder','self');
+
+    chatBubble.innerHTML = 
+    `
+        <h2 class="name">${nameVal}</h2>
+        <p class="message">${msgVal}</p>
+        <span>${dateVal}</span>
+    `
+
+    // console.log(chatBubble);
+
+    if(nameVal !== 'arwin'){
+        chatBubble.classList.remove('self');
+    } 
+
+    chatRoom.appendChild(chatBubble);
+
+    // console.log(chatRoom.scrollHeight);
     chatRoom.scrollTo(0, chatRoom.scrollHeight);
 });
 
@@ -66,8 +66,19 @@ function handleSubmit(e){
     let name = inputs[0].value;
     let message = inputs[1].value;
     let now = new Date();
-    console.log(now.toTimeString().substring(0,8));
-    console.log(now.toISOString().substr(0,10));
+
+    //get the date, month and year
+    let dd = String(now.getDate()).padStart(2, '0');
+    let mm = String(now.getMonth() + 1).padStart(2, '0'); //January is 0!
+    let yyyy = now.getFullYear();
+
+    let date = mm + '/' + dd + '/' + yyyy;
+
+    console.log(date);
+
+    console.log(now);
+    // console.log(now.toTimeString().substring(0,8));
+    // console.log(now.toISOString().substr(0,10));
 
 
     //push data and store in database
@@ -75,27 +86,11 @@ function handleSubmit(e){
         name: name,
         msg: message,
         // add date values here
+        date: date,
     });
 
 
     console.log(`name: ${inputs[0].value}, message: ${inputs[1].value}`);
-    
-    // let chatBubble = 
-    // `
-    // <div class="message-holder">
-    //     <h2 class="name">${name}</h2>
-    //     <p class="message">${message}</p>
-    // </div>
-    // `
-    
-    // console.log(chatBubble);
-    // chatRoom.innerHTML += chatBubble;
 
     form.reset();
 }
-
-// function handleMessage(){
-//     console.log(`name: ${inputs[0].value}, message: ${inputs[1].value}`);
-//     inputs[0].value = "";
-//     inputs[1].value = "";
-// }
