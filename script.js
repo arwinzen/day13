@@ -67,7 +67,7 @@ function handleLogin(e){
             if (userFound == false){
                 alert('Invalid credentials');
             }
-        }, 800);
+        }, 1000);
       // logic for signup form submission
     } else if (target && target.matches('.signup-form')){
         console.log('matches signup form');
@@ -85,14 +85,16 @@ function handleLogin(e){
     }
 }
 
-// add a click listener for the forms
+// add a click listener for the form
 credentials.addEventListener('click', displayForm);
 
 function displayForm(e){
     // console.log('clicked signup')
-    
+    // set target to event target
     let target = e.target;
     console.log(target);
+    // change the innerHTML of the credentials element based on the target link 
+    // display signup form if anchor tag is of class signupRedirect
     if (target && target.matches('.signupRedirect')){
         console.log('redirect to signup');
         credentials.innerHTML = 
@@ -104,6 +106,7 @@ function displayForm(e){
             <p>Already have an account? <a class="loginRedirect" href="#">Login</a></p>
         </form>
         `
+      // display login form if anchor tag is of class loginRedirect
     } else if (target && target.matches('.loginRedirect')){
         console.log('redirect to login');
         credentials.innerHTML = 
