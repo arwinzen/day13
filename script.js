@@ -53,7 +53,7 @@ function handleLogin(e){
             if (userFound == false){
                 alert('Invalid credentials');
             }
-        }, 500);
+        }, 800);
     } else if (target && target.matches('.signup-form')){
         console.log('matches signup form');
         // push user credentials to the users table in firebase
