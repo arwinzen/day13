@@ -16,7 +16,19 @@ input {
     padding: 1rem;
     border: 1px solid rgb(179, 170, 170);
     border-radius: 0.3rem;
+    margin: 0 auto;
     margin-bottom: 0.5rem;
+    /* width: auto; */
+}
+
+.credentials {
+    display: grid;
+    width: 90%;
+    height: 30%;
+    /* justify-content: center; */
+    align-items: center;
+    text-align: center;
+
 }
 
 button {
@@ -26,6 +38,8 @@ button {
     cursor: pointer;
     transition: transform 0.2s;
     width: 100%;
+    max-width: 10rem;
+    margin: 0 auto;
 }
 
 button:active {
@@ -33,6 +47,10 @@ button:active {
     box-shadow: inset 1px 1px 1px gray;
 }
 
-.signup-form {
-    /* display: none; */
+p {
+    color: white;
+}
+
+a {
+    color: white;
 }

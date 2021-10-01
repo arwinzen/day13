@@ -36,10 +36,14 @@ firebase.database().ref('chat').child('message').on('child_added', function(snap
     let nameVal = snapshot.val().name; 
     let msgVal = snapshot.val().msg; // string
     let dateVal = snapshot.val().date;
+    let timeVal = snapshot.val().time;
 
     // to remove undefined values for test data
     if (!dateVal){
         dateVal = "";
+    }
+    if (!timeVal){
+        timeVal = "";
     }
 
     let chatBubble = document.createElement('div');
@@ -47,9 +51,9 @@ firebase.database().ref('chat').child('message').on('child_added', function(snap
 
     chatBubble.innerHTML = 
     `
-        <h2 class="name">${nameVal}</h2>
+        <h4 class="name">${nameVal}</h4>
         <p class="message">${msgVal}</p>
-        <span>${dateVal}</span>
+        <span class="timestamp">${dateVal} ${timeVal}</span>
     `
 
     // console.log(chatBubble);
@@ -80,10 +84,12 @@ function handleSubmit(e){
     let yyyy = now.getFullYear();
 
     let date = dd + '/' + mm + '/' + yyyy;
+    let time = now.toTimeString().substring(0,5);
+    // console.log(now.toTimeString().substring(0,8));
 
-    console.log(date);
+    // console.log(date);
 
-    console.log(now);
+    // console.log(now);
     // console.log(now.toTimeString().substring(0,8));
     // console.log(now.toISOString().substr(0,10));
 
@@ -93,7 +99,8 @@ function handleSubmit(e){
         name: name,
         msg: message,
         // add date values here
-        date: date
+        date: date,
+        time: time
     });
 
 

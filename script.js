@@ -13,23 +13,13 @@ const firebaseConfig = {
     firebase.initializeApp(firebaseConfig);
     console.log(firebase);
 
-// let db = firebase.database().ref('chat');
-// console.log(db);
-
 const credentials = document.querySelector('.credentials');
-// const login = document.querySelector('.login-form');
-// const signup = document.querySelecotr('.signup-form');
-// const signupLink = document.querySelector('.signup-redirect');
-// const loginLink = document.querySelector('.login-redirect');
+
 
 credentials.addEventListener('submit', handleLogin);
 
 function handleLogin(e){
     e.preventDefault();
-    // console.log(e.target);
-    // console.log(e.target.elements.userid.value);
-    // console.log(e.target.elements.password.value);
-    // console.log(e.target.reset());
 
     // get data from form 
     // let userid= e.target.elements.userid.value;
@@ -37,11 +27,11 @@ function handleLogin(e){
     let userid = sessionStorage.getItem('userid');
     let password = e.target.elements.password.value;
     let target = e.target;
+    let userFound = false;
 
     // if submit belongs to login button 
     if (target && target.matches('.login-form')){
         console.log('matches login form');
-        let userFound = false;
         // check if user exists
         firebase.database().ref('chat').child('users').on('child_added', function(snapshot){
             // console.log(snapshot);
@@ -51,6 +41,7 @@ function handleLogin(e){
 
             if (userid == nameVal && password == pwdVal){
                 // reset form fields
+                console.log(userFound);
                 userFound = true;
                 e.target.reset();
                 window.location.href = "chat.html";
@@ -58,9 +49,11 @@ function handleLogin(e){
                 userFound = false;
             }
         })
-        if (userFound == false){
-            alert('Invalid credentials');
-        }
+        setTimeout(function(){
+            if (userFound == false){
+                alert('Invalid credentials');
+            }
+        }, 500);
     } else if (target && target.matches('.signup-form')){
         console.log('matches signup form');
         // push user credentials to the users table in firebase
@@ -108,54 +101,3 @@ function displayForm(e){
     }
 }
     
-
-//     const signup = document.querySelector('.signup-form');
-//     const loginLink = document.querySelector('.login-redirect');
-    
-//     signup.addEventListener('submit', handleSignUp);
-//     loginLink.addEventListener('click', redirectLogin);
-// }
-
-// function handleSignUp(e){
-//     console.log(e);
-//     // check if user exists
-//     firebase.database().ref('chat').child('users').on('child_added', function(snapshot){
-//         console.log(snapshot);
-//         console.log(snapshot.val().userid);
-//         let nameVal = snapshot.val().userid;
-//         let pwdVal = snapshot.val().password;
-
-//         if (userid !== nameVal){
-//             // reset form fields
-//             // signup.reset();
-//             // push user credentials to the users table in firebase
-//             // firebase.database().ref('chat').child('users').push({
-//             //     userid: userid,
-//             //     password: password
-//             // });
-//             // window.location.href = "chat.html";
-//         } else {
-//             // reset form fields
-//             // signup.reset();
-//             alert("User already exists");
-//             return;
-//         }
-//     })
-// }
-
-// function redirectLogin(){
-//     credentials.innerHTML = 
-//     `
-    // <form class="login-form login">
-    //     <input id="userid" type="text" placeholder="Username" required autocomplete="off">
-    //     <input id="password" type="password" placeholder="Password" required>
-    //     <button class="login-btn" type="submit">Login</button>
-    //     <p>Don't have an account? <a class="signup-redirect" href="#">Signup</a></p>
-    // </form>
-    
-    
-//     const login = document.querySelector('.login-form');
-//     const signupLink = document.querySelector('.signup-redirect');
-
-//     signupLink.addEventListener('click', displaySignUpForm);
-// 
