@@ -14,7 +14,7 @@ body {
     height: 95vh;
     width: 600px;
     min-width: 600px;
-    border-radius: 0.3rem 0.3rem 0 0;
+    border-radius: 0.3rem;
     display: grid;
     /* justify-content: center; */
     /* align-items: center; */
@@ -40,13 +40,14 @@ body {
     background-color: cadetblue;
     display: grid;
     grid-template-columns: 0.9fr auto;
+    border-radius: 0.3rem;
 }
 
 .chat-holder input {
     display: block;
     padding: 1rem;
     border: 1px solid rgb(179, 170, 170);
-    border-radius: 0.3rem 0 0 0.3rem;
+    border-radius: 0 0 0 0.3rem;
     height: auto;
     max-height: 100px;
 }
@@ -58,7 +59,7 @@ button {
     padding: 1rem;
     border: 0;
     border: 1px solid rgb(179, 170, 170);
-    border-radius: 0 0.3rem 0.3rem 0;
+    border-radius: 0 0 0.3rem 0;
     text-decoration: none;
     font-weight: 600;
     font-size: 1.2rem;
@@ -104,7 +105,7 @@ button:active {
 }
 
 .message {
-    font-size: 12px;
+    font-size: 13px;
     line-height: 20px;
     color: rgba(0,0,0,0.8);
     overflow-wrap: break-word;
